@@ -1,11 +1,19 @@
 package sis.studentinfo;
 
+import java.util.ArrayList;
+
 public class Student {
+	public enum Grade {
+		A, B, C, D, E, F;
+	}
+
 	static final String IN_STATE = "경기도";
 	String name;
-	int credits;
-	String state;
-	
+	private int credits;
+	private String state;
+	private ArrayList<Grade> grades = new ArrayList<>();
+	private GradingStrategy gradingStrategy;
+
 	public Student(String name) {
 		this.name = name;
 	}
@@ -56,7 +64,7 @@ public class Student {
 	}
 
 	public boolean isInState() {
-		if(state==null) {
+		if (state == null) {
 			return false;
 		}
 		return state.equals(IN_STATE);
@@ -64,6 +72,26 @@ public class Student {
 
 	public void setState(String state) {
 		this.state = state;
-		
 	}
+
+	public double getGpa() {
+		if (grades.isEmpty()) {
+			return 0;
+		}
+
+		double total = 0.0;
+		for (Grade grade : grades) {
+			total += gradingStrategy.getPoint(grade);
+		}
+		return total / grades.size();
+	}
+
+	public void setGradingStrategy(GradingStrategy gradingStrategy) {
+		this.gradingStrategy = gradingStrategy;
+	}
+
+	public void addGrade(Grade grade) {
+		grades.add(grade);
+	}
+
 }

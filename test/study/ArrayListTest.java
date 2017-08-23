@@ -3,12 +3,25 @@ package study;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.Test;
 
 import sis.studentinfo.Student;
 
 public class ArrayListTest {
+	@Test
+	public void sort() throws Exception {
+		ArrayList<String> values = new ArrayList<>();
+		values.add("KOR");
+		values.add("CHN");
+		values.add("ENG");
+		Collections.sort(values);
+		for (String value : values) {
+			System.out.println(value);
+		}
+	}
+	
 	@Test
 	public void study() throws Exception {
 		ArrayList<String> list = new ArrayList<String>();

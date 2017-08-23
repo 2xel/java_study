@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CourseSession {
+public class CourseSession implements Comparable<CourseSession> {
 	private String department;
 	private String number;
 	private Date startdate;
@@ -81,5 +81,14 @@ public class CourseSession {
 
 	public void setNumberOfCredits(int credits) {
 		this.credits = credits;
+	}
+
+	@Override
+	public int compareTo(CourseSession o) {
+		int result = department.compareTo(o.department);
+		if(result == 0) {
+			return number.compareTo(o.number);
+		}
+		return result;
 	}
 }
